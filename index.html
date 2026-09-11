@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hugo Miño — Environmental Systems & AI Optimization</title>
+  <meta name="description" content="Hugo Miño — systems-oriented professional working at the intersection of environmental science, artificial intelligence, and process optimization.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hugo Miño — Environmental Systems & AI Optimization">
+  <meta property="og:description" content="Designing systems at the intersection of sustainability, artificial intelligence, and process optimization.">
+  <meta property="og:image" content="assets/images/iberimet.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b4332'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f7f6f3' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    /* ---- RESET & BASE ---- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:           #f7f6f3;
+      --bg-alt:       #ffffff;
+      --text:         #0f0f0e;
+      --text-muted:   #72726f;
+      --accent:       #1b4332;
+      --accent-2:     #2d6a4f;
+      --border:       #e0ddd8;
+      --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+      --font-serif:   'DM Serif Display', Georgia, serif;
+      --pad-section:  clamp(80px, 10vw, 120px);
+      --container:    1280px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---- UTILITIES ---- */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
+    }
+
+    .label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .label-green {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ---- NAV ---- */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 22px clamp(20px, 4vw, 48px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(247, 246, 243, 0.9);
+      backdrop-filter: blur(14px);
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ---- HERO ---- */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle grid pattern */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 80px 80px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 80px;
+      align-items: center;
+      width: 100%;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-eyebrow-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.96;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 500px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 52px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 30px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--accent-2); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      background: var(--bg-alt);
+      border-color: var(--text-muted);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 580px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* Decorative corner brackets */
+    .hero-image-wrap::before,
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: var(--accent);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .hero-image-wrap::before {
+      top: -10px; right: -10px;
+      border-width: 1px 1px 0 0;
+    }
+    .hero-image-wrap::after {
+      bottom: -10px; left: -10px;
+      border-width: 0 0 1px 1px;
+    }
+
+    /* ---- ABOUT ---- */
+    #about {
+      padding: var(--pad-section) 0;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 18px 0 32px;
+    }
+
+    .about-text .body-p {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 18px;
+    }
+
+    .about-synthesis {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--text);
+      margin: 32px 0 40px;
+      padding-left: 20px;
+      border-left: 2px solid var(--accent);
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .cap-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .cap-item::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .education {
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .edu-item {
+      margin-bottom: 18px;
+    }
+    .edu-item:last-child { margin-bottom: 0; }
+
+    .edu-degree {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .edu-school {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ---- FOCUS AREAS ---- */
+    #focus {
+      padding: var(--pad-section) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .focus-header {
+      max-width: 560px;
+      margin-bottom: 64px;
+    }
+    .focus-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-top: 18px;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .focus-card {
+      background: var(--bg);
+      padding: 48px 40px;
+    }
+
+    .focus-num {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 36px;
+      display: block;
+    }
+
+    .focus-card h3 {
+      font-family: var(--font-serif);
+      font-size: 25px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+
+    .focus-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ---- PROJECTS ---- */
+    #projects {
+      padding: var(--pad-section) 0;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-header {
+      margin-bottom: 56px;
+    }
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-top: 18px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .project-card {
+      background: var(--bg-alt);
+      padding: 44px 40px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card.span2 {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 460px;
+      gap: 56px;
+      align-items: center;
+      padding: 0;
+    }
+
+    .project-card.span2 .project-body {
+      padding: 44px 48px;
+    }
+
+    .project-card.span2 .project-cover {
+      height: 100%;
+      min-height: 360px;
+    }
+
+    .project-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .p-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(27, 67, 50, 0.08);
+      padding: 4px 10px;
+    }
+
+    .p-status {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .project-card h3 {
+      font-family: var(--font-serif);
+      font-size: 27px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .project-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .project-details {
+      margin-top: 28px;
+      border-top: 1px solid var(--border);
+      padding-top: 22px;
+    }
+
+    .detail-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+    .detail-row:last-child { margin-bottom: 0; }
+
+    .d-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      min-width: 90px;
+      padding-top: 1px;
+    }
+
+    .d-value {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .project-cover {
+      overflow: hidden;
+    }
+    .project-cover img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s ease;
+    }
+    .project-card:hover .project-cover img { transform: scale(1.04); }
+
+    /* ---- EXPERIENCE ---- */
+    #experience {
+      padding: var(--pad-section) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-inner {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 80px;
+    }
+
+    .exp-inner h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-top: 18px;
+      position: sticky;
+      top: 120px;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 3px;
+      top: 10px;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .t-item {
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .t-item:last-child { margin-bottom: 0; }
+
+    .t-dot {
+      position: absolute;
+      left: -29px;
+      top: 9px;
+      width: 8px;
+      height: 8px;
+      background: var(--bg-alt);
+      border: 2px solid var(--accent);
+      border-radius: 50%;
+    }
+
+    .t-item .t-period {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .t-item h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    .t-item .t-org {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .t-item p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ---- WRITING ---- */
+    #writing {
+      padding: var(--pad-section) 0;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .writing-inner {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .writing-text h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 18px 0 24px;
+    }
+
+    .writing-text > p {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .topic {
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 13px 18px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .topic:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .writing-photo {
+      position: sticky;
+      top: 120px;
+    }
+    .writing-photo img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* ---- CURRENT WORK ---- */
+    #current {
+      padding: var(--pad-section) 0;
+      background: var(--accent);
+    }
+
+    #current .label {
+      color: rgba(255,255,255,0.45);
+    }
+
+    #current > .container > h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.5vw, 52px);
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin: 18px 0 64px;
+      color: #fff;
+    }
+
+    .current-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .current-item {
+      background: var(--accent);
+      padding: 44px 40px;
+    }
+
+    .current-n {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      color: rgba(255,255,255,0.15);
+      margin-bottom: 28px;
+      display: block;
+    }
+
+    .current-item h3 {
+      font-size: 19px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .current-item p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* ---- CONTACT ---- */
+    #contact {
+      padding: var(--pad-section) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-wrap {
+      max-width: 640px;
+    }
+
+    .contact-wrap h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 5vw, 72px);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin: 18px 0 48px;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      transition: padding-left 0.25s, color 0.2s;
+    }
+    .contact-item:first-child { border-top: 1px solid var(--border); }
+    .contact-item:hover {
+      padding-left: 10px;
+      color: var(--accent);
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+      letter-spacing: 0;
+    }
+
+    /* ---- FOOTER ---- */
+    footer {
+      padding: 32px clamp(20px, 4vw, 48px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ---- SCROLL ANIMATIONS ---- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.72s ease, transform 0.72s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-image-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image { display: none; }
+      .focus-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.span2 {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+      }
+      .project-card.span2 .project-cover { min-height: 300px; }
+      .exp-inner { grid-template-columns: 1fr; }
+      .exp-inner h2 { position: static; }
+      .writing-inner { grid-template-columns: 1fr; }
+      .writing-photo { display: none; }
+      .current-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .capabilities-grid { grid-template-columns: 1fr; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .current-grid { grid-template-columns: 1fr; }
+      .project-card { padding: 32px 24px; }
+      .focus-card { padding: 36px 28px; }
+      .hero-heading { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================ NAV -->
+<nav id="main-nav">
+  <a href="#" class="nav-logo">Hugo Miño</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================ HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-line"></span>
+          <span class="hero-eyebrow-text">Environmental Systems &amp; AI Optimization</span>
+        </div>
+        <h1 class="hero-heading">Hugo<br>Miño</h1>
+        <p class="hero-sub">
+          Designing systems at the intersection of sustainability,
+          artificial intelligence, and process optimization.
+        </p>
+        <div class="hero-ctas">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-outline">Contact</a>
+        </div>
+      </div>
+
+      <div class="hero-image-wrap">
+        <img src="assets/images/iberimet.jpg" alt="Hugo Miño">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="reveal">
+        <span class="label">About</span>
+        <h2>Systems-oriented.<br>Applied by nature.</h2>
+
+        <p class="body-p">
+          I work at the intersection of environmental science and computational
+          optimization. My background spans laboratory research, industrial
+          process auditing, and AI-driven system design — always with a focus
+          on real-world impact over theoretical abstraction.
+        </p>
+        <p class="body-p">
+          Currently I lead technical auditing and process optimization at
+          ACSOS (Grupo AireLimpio), where I explore the application of
+          agentic AI systems to real industrial operations. Prior to that,
+          I conducted applied research at IMDEA Water on wastewater valorization
+          using bioreactor systems.
+        </p>
+
+        <blockquote class="about-synthesis">
+          "A systems-oriented professional working at the intersection
+          of environmental science and computational optimization."
+        </blockquote>
+
+        <div class="capabilities-grid">
+          <div class="cap-item">Systems analysis</div>
+          <div class="cap-item">Process optimization</div>
+          <div class="cap-item">Applied AI integration</div>
+          <div class="cap-item">Environmental systems</div>
+          <div class="cap-item">Product thinking</div>
+          <div class="cap-item">System design</div>
+        </div>
+
+        <div class="education">
+          <div class="edu-item">
+            <div class="edu-degree">MSc — AI Applied to Industrial Optimization</div>
+            <div class="edu-school">Visual Business School + UTAMED</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">BSc — Environmental Science</div>
+            <div class="edu-school">Universidad de Alcalá (UAH)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-image reveal">
+        <img src="assets/images/puente.jpg" alt="Hugo Miño">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOCUS AREAS -->
+<section id="focus">
+  <div class="container">
+    <div class="focus-header reveal">
+      <span class="label">Focus Areas</span>
+      <h2>Three pillars of work.</h2>
+    </div>
+
+    <div class="focus-grid">
+      <div class="focus-card reveal">
+        <span class="focus-num">01</span>
+        <h3>AI Applied to<br>Operational Systems</h3>
+        <p>
+          Designing and deploying intelligent agents that interact with
+          real industrial and organizational processes. The objective is
+          not automation for its own sake, but measurable impact on
+          efficiency, decisions, and outcomes.
+        </p>
+      </div>
+      <div class="focus-card reveal">
+        <span class="focus-num">02</span>
+        <h3>Environmental &amp;<br>Sustainability Systems</h3>
+        <p>
+          From laboratory-scale bioreactor research to industrial
+          compliance auditing, work spanning the full scope of
+          environmental systems — understanding how matter, energy,
+          and information flow through complex natural and engineered
+          environments.
+        </p>
+      </div>
+      <div class="focus-card reveal">
+        <span class="focus-num">03</span>
+        <h3>Product &amp;<br>System Design</h3>
+        <p>
+          Building structured solutions that address real behavioral
+          and organizational problems. Whether a digital product for
+          reading habits or an organizational framework for a sports
+          club — define the system, identify constraints, design for
+          outcomes.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">Projects</span>
+      <h2>Selected work.</h2>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- IMDEA — featured, full width -->
+      <div class="project-card span2 reveal">
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="p-tag">Environmental Research</span>
+            <span class="p-status">Completed</span>
+          </div>
+          <h3>IMDEA Water —<br>Wastewater Valorization</h3>
+          <p>
+            Applied research on converting brewery effluent into biofertilizer
+            using bioreactor systems. A practical study in circular economy
+            principles within water treatment engineering, developed at
+            IMDEA Water Institute in Madrid.
+          </p>
+          <div class="project-details">
+            <div class="detail-row">
+              <span class="d-label">Context</span>
+              <span class="d-value">IMDEA Water Institute, Madrid</span>
+            </div>
+            <div class="detail-row">
+              <span class="d-label">Approach</span>
+              <span class="d-value">Bioreactor design, nutrient recovery, circular economy frameworks</span>
+            </div>
+            <div class="detail-row">
+              <span class="d-label">Outcome</span>
+              <span class="d-value">Validated protocol for brewery wastewater conversion to biofertilizer</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-cover">
+          <img src="assets/images/pipeteando.jpg" alt="Laboratory research at IMDEA Water">
+        </div>
+      </div>
+
+      <!-- ACSOS -->
+      <div class="project-card reveal">
+        <div class="project-meta">
+          <span class="p-tag">AI + Operations</span>
+          <span class="p-status">Ongoing</span>
+        </div>
+        <h3>ACSOS — AI-Driven Process Optimization</h3>
+        <p>
+          Implementing optimization strategies and exploring agentic AI
+          in real industrial environmental processes. Work focused on
+          transforming compliance auditing workflows through systematic
+          AI integration at Grupo AireLimpio.
+        </p>
+        <div class="project-details">
+          <div class="detail-row">
+            <span class="d-label">Problem</span>
+            <span class="d-value">Manual, high-volume technical auditing with limited scalability</span>
+          </div>
+          <div class="detail-row">
+            <span class="d-label">Approach</span>
+            <span class="d-value">Agentic AI systems integrated into operational workflows</span>
+          </div>
+          <div class="detail-row">
+            <span class="d-label">Status</span>
+            <span class="d-value">Active development — ongoing operational implementation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LectorApp -->
+      <div class="project-card reveal">
+        <div class="project-meta">
+          <span class="p-tag">Product Design</span>
+          <span class="p-status">In Development</span>
+        </div>
+        <h3>LectorApp — Behavioral Design for Reading</h3>
+        <p>
+          A digital product designed to improve reading habits in a
+          high-dopamine digital environment. Built at the intersection
+          of behavioral science, product design, and habit formation
+          theory — technology as a tool for depth, not distraction.
+        </p>
+        <div class="project-details">
+          <div class="detail-row">
+            <span class="d-label">Problem</span>
+            <span class="d-value">Attention fragmentation displacing sustained reading habits</span>
+          </div>
+          <div class="detail-row">
+            <span class="d-label">Approach</span>
+            <span class="d-value">Behavioral systems + product design for habit formation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Handball -->
+      <div class="project-card reveal">
+        <div class="project-meta">
+          <span class="p-tag">Organizational Systems</span>
+          <span class="p-status">In Development</span>
+        </div>
+        <h3>Handball Club — Organizational Structure from Zero</h3>
+        <p>
+          Building the organizational structure of a handball club from
+          scratch — governance, operational systems, and culture developed
+          in parallel. A real-world application of systems creation in a
+          human and organizational domain requiring both design and execution.
+        </p>
+        <div class="project-details">
+          <div class="detail-row">
+            <span class="d-label">Focus</span>
+            <span class="d-value">Governance design, operational frameworks, leadership</span>
+          </div>
+          <div class="detail-row">
+            <span class="d-label">Status</span>
+            <span class="d-value">Active — structure and first operational cycles in progress</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="exp-inner">
+
+      <div class="reveal">
+        <span class="label">Experience</span>
+        <h2>Timeline.</h2>
+      </div>
+
+      <div class="timeline reveal">
+
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-period">2024 — Present</div>
+          <h3>Technical Auditor &amp; Process Optimization Lead</h3>
+          <div class="t-org">ACSOS · Grupo AireLimpio</div>
+          <p>
+            Leading technical environmental auditing operations and
+            driving AI-enabled process optimization across industrial
+            workflows. Systematic improvement of compliance and quality
+            processes through structured analysis and intelligent automation.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-period">2023 — 2024</div>
+          <h3>MSc — AI Applied to Industrial Optimization</h3>
+          <div class="t-org">Visual Business School + UTAMED</div>
+          <p>
+            Postgraduate specialization in machine learning, process
+            optimization, and intelligent systems applied to industrial
+            and operational environments. Bridging environmental science
+            foundations with computational methods.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-period">2022 — 2023</div>
+          <h3>Research — Wastewater Valorization</h3>
+          <div class="t-org">IMDEA Water Institute</div>
+          <p>
+            Applied laboratory research on bioreactor systems for
+            converting brewery wastewater into biofertilizer via biological
+            nutrient recovery. Circular economy frameworks in water
+            treatment engineering.
+          </p>
+        </div>
+
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-period">2018 — 2022</div>
+          <h3>BSc — Environmental Science</h3>
+          <div class="t-org">Universidad de Alcalá (UAH)</div>
+          <p>
+            Undergraduate formation in environmental systems, ecology,
+            geochemistry, and environmental impact assessment. Foundation
+            in systems thinking and scientific methodology.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ WRITING -->
+<section id="writing">
+  <div class="container">
+    <div class="writing-inner">
+
+      <div class="writing-text reveal">
+        <span class="label">Writing &amp; Ideas</span>
+        <h2>Thinking in systems.</h2>
+        <p>
+          A secondary layer to the work. Reflective writing on the
+          intersections of technology, cognition, behavior, and complex
+          systems — not as thought leadership, but as structured thinking
+          made visible.
+        </p>
+        <div class="topics-grid">
+          <div class="topic">AI and systems thinking</div>
+          <div class="topic">Sustainability and technology</div>
+          <div class="topic">Human behavior and attention</div>
+          <div class="topic">Reading and cognition</div>
+          <div class="topic">Digital habits</div>
+          <div class="topic">Complexity and emergence</div>
+        </div>
+      </div>
+
+      <div class="writing-photo reveal">
+        <img src="assets/images/libro-laguna.jpg" alt="Reading in nature">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CURRENT WORK -->
+<section id="current">
+  <div class="container">
+    <span class="label">Active Work</span>
+    <h2>What I'm building now.</h2>
+
+    <div class="current-grid">
+      <div class="current-item reveal">
+        <span class="current-n">01</span>
+        <h3>LectorApp</h3>
+        <p>
+          A product for building deep reading habits in a world engineered
+          to fragment attention. In active development.
+        </p>
+      </div>
+      <div class="current-item reveal">
+        <span class="current-n">02</span>
+        <h3>Agentic AI in Operations</h3>
+        <p>
+          Implementing agentic AI workflows into real industrial processes
+          at ACSOS. Finding where intelligent automation creates genuine
+          operational leverage.
+        </p>
+      </div>
+      <div class="current-item reveal">
+        <span class="current-n">03</span>
+        <h3>Handball Club</h3>
+        <p>
+          Building a club organizational structure from zero — governance,
+          systems, and culture developed in parallel.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap reveal">
+      <span class="label">Contact</span>
+      <h2>Let's connect.</h2>
+      <div class="contact-items">
+        <a href="mailto:porteroipla14@gmail.com" class="contact-item">
+          <div class="contact-icon">@</div>
+          porteroipla14@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/hugomino" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-icon">in</div>
+          LinkedIn — Hugo Miño
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER -->
+<footer>
+  <p>Hugo Miño — Environmental Systems &amp; AI Optimization</p>
+  <p>&copy; 2026</p>
+</footer>
+
+<!-- ============================================================ JS -->
+<script>
+  /* Nav scroll effect */
+  const nav = document.getElementById('main-nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 48);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Reveal on scroll */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

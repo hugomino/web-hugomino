@@ -1,0 +1,11 @@
+# Personal media library — never published, curated copies live in assets/images/
+Media/
+
+# Secrets
+.env
+.env.local
+.env*.local
+
+# Vercel / dependencies
+.vercel
+node_modules/
