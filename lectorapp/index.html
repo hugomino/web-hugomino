@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LectorApp — Diseño Conductual para la Lectura</title>
+  <meta name="description" content="LectorApp es un producto en desarrollo de Hugo Miño para recuperar hábitos de lectura profunda en un entorno digital de alta dopamina, mediante diseño conductual y pensamiento de producto.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LectorApp — Diseño Conductual para la Lectura">
+  <meta property="og:description" content="Un producto para construir hábitos de lectura profunda en un mundo diseñado para fragmentar la atención.">
+  <meta property="og:image" content="../assets/images/libro-laguna.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231b4332'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' fill='%23f7f6f3' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:           #f7f6f3;
+      --bg-alt:       #ffffff;
+      --text:         #0f0f0e;
+      --text-muted:   #72726f;
+      --accent:       #1b4332;
+      --accent-2:     #2d6a4f;
+      --border:       #e0ddd8;
+      --tag-bg:       rgba(27, 67, 50, 0.08);
+      --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+      --font-serif:   'DM Serif Display', Georgia, serif;
+      --ease-out:     cubic-bezier(0.23, 1, 0.32, 1);
+      --dur-fast:     160ms;
+      --dur-base:     420ms;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:         #0e1210;
+        --bg-alt:     #161b18;
+        --text:       #f1efe9;
+        --text-muted: #8f948e;
+        --accent:     #52b788;
+        --accent-2:   #74c69d;
+        --border:     #2a302b;
+        --tag-bg:     rgba(82, 183, 136, 0.14);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    header {
+      padding: 28px clamp(20px, 4vw, 48px);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .back-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--dur-fast) var(--ease-out);
+    }
+    .back-link:hover { color: var(--accent); }
+
+    /* ---- HERO ---- */
+    .hero {
+      padding: 40px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--tag-bg);
+      padding: 6px 12px;
+      margin-bottom: 28px;
+    }
+    .status-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(40px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .lede {
+      font-size: 18px;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 620px;
+    }
+
+    /* ---- SECTIONS ---- */
+    section.block {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section.block:last-of-type { border-bottom: none; }
+
+    section.block h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 3vw, 34px);
+      letter-spacing: -0.02em;
+      margin-bottom: 22px;
+    }
+
+    section.block p {
+      font-size: 15.5px;
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.85;
+      max-width: 620px;
+      margin-bottom: 18px;
+    }
+    section.block p:last-child { margin-bottom: 0; }
+
+    .principles {
+      display: grid;
+      gap: 2px;
+      background: var(--border);
+      margin-top: 32px;
+    }
+    .principle {
+      background: var(--bg-alt);
+      padding: 26px 28px;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 16px;
+    }
+    .principle-n {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--accent);
+    }
+    .principle h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .principle p {
+      font-size: 13.5px;
+      margin-bottom: 0;
+    }
+
+    /* ---- CTA ---- */
+    .cta-box {
+      background: var(--accent);
+      padding: 48px 44px;
+      margin-top: 8px;
+    }
+    .cta-box .label { color: rgba(255,255,255,0.5); }
+    .cta-box h2 {
+      font-family: var(--font-serif);
+      color: #fff;
+      font-size: clamp(24px, 3vw, 30px);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.72);
+      font-size: 14.5px;
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 28px;
+      max-width: 520px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: var(--accent);
+      padding: 13px 28px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: transform var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn:hover { background: #f2f1ee; }
+
+    footer {
+      padding: 32px clamp(20px, 4vw, 48px);
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.visible { transition: opacity 200ms ease !important; transform: none !important; }
+    }
+
+    @media (max-width: 640px) {
+      .principle { grid-template-columns: 24px 1fr; padding: 22px 20px; }
+      .cta-box { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="../" class="back-link">← Hugo Miño</a>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <span class="status-badge">En desarrollo activo</span>
+    <h1>LectorApp</h1>
+    <p class="lede">
+      Un producto para recuperar hábitos de lectura profunda en un entorno
+      digital diseñado para fragmentar la atención. La tecnología como
+      herramienta para la profundidad, no para la distracción.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <span class="label">El problema</span>
+    <h2>La atención se ha convertido en el recurso más disputado.</h2>
+    <p>
+      Los mismos mecanismos que hacen que una aplicación sea "adictiva" —
+      recompensa variable, fricción mínima, estímulo constante — son
+      exactamente los que desplazan la lectura sostenida. No es una cuestión
+      de fuerza de voluntad individual: es un problema de diseño de sistemas.
+    </p>
+    <p>
+      LectorApp parte de esa premisa: si el entorno digital fragmenta la
+      atención por diseño, la solución también tiene que ser de diseño —
+      no un bloqueo de fuerza bruta, sino un sistema que reconstruya el
+      hábito desde su arquitectura conductual.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <span class="label">El enfoque</span>
+    <h2>Ciencia del comportamiento, no fuerza de voluntad.</h2>
+    <p>
+      El producto se construye sobre principios de formación de hábitos con
+      respaldo conductual, aplicados con la misma disciplina de diseño de
+      sistemas que el resto de este trabajo.
+    </p>
+
+    <div class="principles">
+      <div class="principle">
+        <span class="principle-n">01</span>
+        <div>
+          <h3>Fricción donde importa</h3>
+          <p>Reducir la fricción para empezar a leer; introducirla deliberadamente en los sustitutos de bajo esfuerzo que compiten por la atención.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-n">02</span>
+        <div>
+          <h3>Progreso visible</h3>
+          <p>Hacer tangible el hábito a lo largo del tiempo, en lugar de depender de la motivación puntual de cada sesión.</p>
+        </div>
+      </div>
+      <div class="principle">
+        <span class="principle-n">03</span>
+        <div>
+          <h3>Recompensa alineada</h3>
+          <p>La recompensa del sistema es la propia profundidad de lectura — no métricas vacías diseñadas para maximizar el tiempo de uso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block reveal">
+    <span class="label">Estado actual</span>
+    <h2>En desarrollo.</h2>
+    <p>
+      LectorApp está en fase activa de diseño y desarrollo. Todavía no hay
+      una fecha de lanzamiento pública, pero el producto avanza en paralelo
+      al resto del trabajo de Hugo en sistemas aplicados.
+    </p>
+  </section>
+
+  <section class="block reveal">
+    <div class="cta-box">
+      <span class="label">Mantente al tanto</span>
+      <h2>Avísame cuando esté disponible</h2>
+      <p>
+        Sin formularios ni listas de correo automatizadas todavía — un
+        email directo es suficiente para que quedes en el radar del
+        lanzamiento.
+      </p>
+      <a class="btn" href="mailto:porteroipla14@gmail.com?subject=LectorApp%20%E2%80%94%20Av%C3%ADsame%20del%20lanzamiento">
+        Escribir a Hugo
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>LectorApp es un proyecto de Hugo Miño. <a href="../" class="back-link">Volver al sitio principal →</a></p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
