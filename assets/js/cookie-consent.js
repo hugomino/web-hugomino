@@ -3,12 +3,14 @@
  * No cookies of its own — the consent choice lives in localStorage, which is
  * the consent mechanism itself and doesn't require consent to use.
  *
- * Replace GA_MEASUREMENT_ID with a real "G-XXXXXXXXXX" value when Google
- * Analytics is ready. Until then this intentionally loads nothing, even if
- * the visitor accepts, to avoid firing requests at a fake ID.
+ * Loads Google Tag Manager only after explicit "Aceptar". The standard GTM
+ * install also adds a <noscript><iframe> right after <body> that loads
+ * unconditionally — deliberately NOT included here, because it can't respect
+ * consent (no JS = no way to ask first) and would defeat the whole point of
+ * gating this behind opt-in.
  */
 (function () {
-  var GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
+  var GTM_CONTAINER_ID = 'GTM-53N4XGR7';
   var STORAGE_KEY = 'cookie-consent';
 
   function getConsent() {
@@ -28,20 +30,16 @@
   }
 
   function loadAnalytics() {
-    if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
-    if (window.__gaLoaded) return;
-    window.__gaLoaded = true;
+    if (!GTM_CONTAINER_ID || window.__gtmLoaded) return;
+    window.__gtmLoaded = true;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
     var script = document.createElement('script');
     script.async = true;
-    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+    script.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_CONTAINER_ID;
     document.head.appendChild(script);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { window.dataLayer.push(arguments); }
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', GA_MEASUREMENT_ID, { anonymize_ip: true });
   }
 
   function injectStyles() {
@@ -71,7 +69,7 @@
     el.setAttribute('role', 'region');
     el.setAttribute('aria-label', 'Aviso de cookies');
     el.innerHTML =
-      '<p>Usamos cookies de analítica (Google Analytics) solo si las aceptas. ' +
+      '<p>Usamos cookies de analítica (a través de Google Tag Manager) solo si las aceptas. ' +
       'Puedes cambiar de opinión cuando quieras. Más información en la ' +
       '<a href="/cookies/">política de cookies</a>.</p>' +
       '<div class="cc-actions">' +

@@ -251,7 +251,7 @@ Each prospective client gets a one-off mockup of a possible website, sent privat
 Hugo's own pages (`index.html`, `servicios/`, `lectorapp/`, `mockups/index.html` — **not** client mockups, which represent someone else's business) carry:
 
 - `aviso-legal/`, `privacidad/`, `cookies/` — Aviso Legal, Privacidad and Cookies pages, linked from each page's footer.
-- A shared cookie-consent banner (`assets/js/cookie-consent.js`) gating Google Analytics behind explicit opt-in, with an equally-accessible "Rechazar" and a "Preferencias de cookies" footer link to reopen/change the choice later. The GA Measurement ID in that file is a placeholder (`G-XXXXXXXXXX`) — replace it before analytics does anything.
+- A shared cookie-consent banner (`assets/js/cookie-consent.js`) gating Google Tag Manager (container `GTM-53N4XGR7`, which currently manages Google Analytics) behind explicit opt-in, with an equally-accessible "Rechazar" and a "Preferencias de cookies" footer link to reopen/change the choice later. Deliberately skips the standard `<noscript>` GTM iframe — it can't respect consent (no JS, no way to ask first) and would defeat the point of the gate. If tags change inside the GTM container, keep `cookies/index.html`'s cookie table in sync.
 - Self-hosted fonts (`assets/fonts/`) instead of loading from Google Fonts, to avoid an unnecessary third-party IP transfer.
 
 Rule for any future form that collects personal data (none exist today — every contact point is a plain `mailto:` link): it needs its own basic data-protection notice and an explicit consent checkbox before submission, per the Privacidad page's terms. Don't add a data-collecting form without that.
