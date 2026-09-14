@@ -1,0 +1,4 @@
+# Internal notes for mockup clients — kept in git for reference, never deployed.
+# Without this, Vercel would serve any file in the repo as a public URL, and a
+# client with the mockup password could read Hugo's internal sales strategy.
+LEEME.md

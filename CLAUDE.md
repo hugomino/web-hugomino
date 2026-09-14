@@ -11,7 +11,7 @@ Its purpose is to:
 - Enable future transitions to higher-impact roles or independent work
 - Communicate a hybrid profile: Environmental Science + AI + Systems Optimization + Product Thinking
 
-The website is not a freelance portfolio or service offering page.
+The website is not a general freelance marketplace listing or a public portfolio of client work. It combines the personal positioning narrative above with one directed commercial page (`/servicios/`) for web development and automation services — see **Comercial** below. That page exists on its own terms; it does not turn the rest of the site into a service catalog.
 
 ---
 
@@ -56,22 +56,27 @@ Avoid:
 
 Purpose: immediate positioning
 
+Leads with the AI/technical facet first — the environmental science identity is the second beat, carried by About (see below). This ordering is intentional: it's what makes the site work as an entry point for `/servicios/` without turning the whole site into a sales page.
+
 Content:
 
 - Name: Hugo Miño
-- Title: Environmental Systems & AI Optimization
-- Subheading: Designing systems at the intersection of sustainability, artificial intelligence, and process optimization
+- Title/eyebrow: AI & process optimization framing (currently: studying the Máster en IA Aplicada a la Optimización de Procesos Productivos, UTAMED)
+- Subheading: names the master's program and connects it to applied work (web development, automations)
+- Photo: a professional/technical-looking portrait (not a field or lab photo — that belongs to About)
 
 CTA:
 
-- View Projects
-- Contact
+- Primary: View Services (`/servicios/`)
+- Secondary: Contact
 
 ---
 
 ### 2. About
 
 Focus: identity and functional profile
+
+Leads with the environmental science identity ("Soy ambientólogo") and a lab/field photo — this is the grounding/credibility beat that follows the AI-first Hero. Do not swap this order without also revisiting Hero; the two sections are designed as a pair (tech first, environmental foundation second).
 
 Include:
 
@@ -219,6 +224,25 @@ No unnecessary friction.
 - Subtle technical aesthetic (data, networks, process visualization)
 - No heavy visual branding
 - Focus on clarity and hierarchy of information
+
+---
+
+## Comercial — Venta de Páginas Web y Automatizaciones
+
+A dedicated page, `/servicios/`, offers web development and AI-driven automation services to local businesses. It exists alongside the personal positioning site, not instead of it:
+
+- Content: what's offered (custom web pages, AI automation flows), how the process works (short conversation → real no-commitment mockup → launch if it fits), and a contact CTA. Same analytical, no-hype tone as the rest of the site — no pricing tables, testimonials, or urgency language.
+- **Never names or links specific clients** on this public page, even as case studies or logos, until a client has explicitly agreed to be shown. Client mockups are confidential by default (see below).
+- Linked from the main nav (`Servicios`) and from the Hero's primary CTA.
+
+### Client mockups (`mockups/`)
+
+Each prospective client gets a one-off mockup of a possible website, sent privately so they can evaluate it before committing:
+
+- One folder per client at `mockups/<slug>/`, gated by Vercel Edge Middleware (`middleware.js`) requiring a per-client password (HTTP Basic Auth, `MOCKUP_PASS_<SLUG>` env var). Each client's link and password are theirs alone — never shared or listed together anywhere.
+- `mockups/index.html` is the one public, client-agnostic page under this path (the middleware explicitly allows it through) — it explains that access is by private link and offers a contact fallback. It must never list or hint at which clients have a mockup.
+- A mockup's own internal notes (business research, pricing strategy, competitor analysis — e.g. a `LEEME.md` alongside a mockup) must never be deployed publicly: keep it excluded via `.vercelignore`. It's for Hugo's reference only, and the client could otherwise read it with their own mockup password.
+- Each mockup carries its own visible disclaimer (`noindex` + an on-page notice) that it's a demo, not the client's official site.
 
 ---
 

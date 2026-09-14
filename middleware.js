@@ -24,8 +24,14 @@ export default function middleware(request) {
   const url = new URL(request.url);
   const slug = slugFromPath(url.pathname);
 
+  // Bare /mockups/ is the public, client-agnostic "access your mockup" page —
+  // it names no clients, so it doesn't need a password.
+  if (!slug) {
+    return next();
+  }
+
   // _template is not a real client mockup — never serve it directly.
-  if (!slug || slug === '_template') {
+  if (slug === '_template') {
     return unauthorized('mockups');
   }
 
